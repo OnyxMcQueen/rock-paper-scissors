@@ -1,8 +1,3 @@
-// Create variables to keep track of scores for both the person and the computer
-let humanScore = 0;
-let computerScore = 0;
-
-
 function getComputerChoice(){
   // Generate a random number by multiplying by 3 and then rounding down to get three options - 0, 1 or 2.
   let randomNumber = Math.floor(Math.random() * 3);
@@ -22,54 +17,81 @@ function getHumanChoice(){
   let userAnswer = prompt('Please Make A Choice: Rock, Paper or Scissors?');
 
   // If the user's input falls into one of three choices, return the choice
-  if(userAnswer.toLowerCase() === 'rock' || userAnswer.toLowerCase() === 'paper' || userAnswer.toLowerCase === 'scissors'){
+  if(userAnswer.toLowerCase() === 'rock' || userAnswer.toLowerCase() === 'paper' || userAnswer.toLowerCase() === 'scissors'){
     return userAnswer;
+  } else {
+    getHumanChoice();
   }
-
-  return console.error('It looks like you gave an invalid answer');
 }
 
 function determineWinner(humanChoice, computerChoice){
   // Rock Beats Scissors
   if(humanChoice === 'rock' && computerChoice === 'scissors'){
-    humanScore += 1;
-    return `Hooray, You win! Rock beats Scissors. You have ${humanScore} points and the computer has ${computerScore} points.`;
+     console.log(`Hooray, You win! Rock beats Scissors.`);
+     return 'human';
   } else if(humanChoice === 'scissors' && computerChoice === 'rock'){
-    computerScore += 1;
-    return `Aw, You lose; Scissors loses aganist Rock. You have ${humanScore} points and the computer has ${computerScore} points.`;
+    console.log(`Aw, You lose; Scissors loses aganist Rock.`);
+    return 'computer';
   }
 
   // Scissors Beats Paper
   if(humanChoice === 'scissors' && computerChoice === 'paper'){
-    humanScore += 1;
-    return `Hooray, You win! Scissors beats Paper. You have ${humanScore} points and the computer has ${computerScore} points.`;
+    console.log(`Hooray, You win! Scissors beats Paper.`);
+    return 'human';
   } else if(humanChoice === 'paper' && computerChoice === 'scissors'){
-    computerScore += 1;
-    return `Aw, You lose; Paper loses aganist Scissors. You have ${humanScore} points and the computer has ${computerScore} points.`;
+    console.log(`Aw, You lose; Paper loses aganist Scissors.`);
+    return 'computer'
   }
 
   // Paper Beats Rock
   if(humanChoice === 'paper' && computerChoice === 'rock'){
-    humanScore += 1;
-    return `Hooray, You win! Paper beats Rock. You have ${humanScore} points and the computer has ${computerScore} points.`;
+    console.log(`Hooray, You win! Paper beats Rock.`);
+    return 'human';
   } else if(humanChoice === 'rock' && computerChoice === 'paper'){
-    computerScore += 1;
-    return `Aw, You lose; Rock loses aganist Paper. You have ${humanScore} points and the computer has ${computerScore} points.`;
+    console.log(`Aw, You lose; Rock loses aganist Paper.`);
+    return 'computer';
   }
 
   // If it's a tie
   if(humanChoice === computerChoice){
-    return 'Looks like it\'s a draw! No points!'
+    console.log('Looks like it\'s a draw! No points!');
+    return 'no points';
   }
 }
 
 function playRound(humanChoice, computerChoice){
-  // Make the choices lowercase for case insensitive comparisons
-  humanChoice = humanChoice.toLowerCase();
-  computerChoice = computerChoice.toLowerCase();
-
   // Determine the winner and store into the result variable
   let result = determineWinner(humanChoice, computerChoice);
-  // Console log the result
-  console.log(result);
+  // return the result
+  return result;
 }
+
+function playGame(){
+// Create variables to keep track of scores for both the person and the computer
+let humanScore = 0;
+let computerScore = 0;
+
+// Play for 5 rounds
+for(let i = 1; i <= 5; i++){
+  let humanSelection = getHumanChoice().toLowerCase();
+  let computerSelection = getComputerChoice().toLowerCase();
+
+  let result = playRound(humanSelection, computerSelection);
+
+  // Update the score depending on who the winner is from the playRound function
+  if(result === 'human'){
+    humanScore += 1;
+  } else if(result === 'computer'){
+    computerScore += 1;
+  }
+}
+
+// Determine who has the most points and is the winner
+  if(humanScore > computerScore){
+    console.log('Congratulations!! You\'ve won the game!');
+  } else {
+    console.log('It looks like you\'ve been defeated. Try Again!');
+  }
+}
+
+playGame();
