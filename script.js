@@ -1,3 +1,8 @@
+// Create variables to keep track of scores for both the person and the computer
+let humanScore = 0;
+let computerScore = 0;
+
+
 function getComputerChoice(){
   // Generate a random number by multiplying by 3 and then rounding down to get three options - 0, 1 or 2.
   let randomNumber = Math.floor(Math.random() * 3);
@@ -23,4 +28,3 @@ function getHumanChoice(){
 
   return console.error('It looks like you gave an invalid answer');
 }
-
