@@ -10,5 +10,17 @@ function getComputerChoice(){
   } else if(randomNumber === 2){
     return "Scissors"
   }
-
 }
+
+function getHumanChoice(){
+  //Grab the user's choice using prompt
+  let userAnswer = prompt('Please Make A Choice: Rock, Paper or Scissors?');
+
+  // If the user's input falls into one of three choices, return the choice
+  if(userAnswer === 'Rock' || userAnswer === 'Paper' || userAnswer === 'Scissors'){
+    return userAnswer;
+  }
+
+  return console.error('It looks like you gave an invalid answer');
+}
+
